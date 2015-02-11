@@ -3,6 +3,13 @@
 </head>
 
 <body>
-	<canvas></canvas>
-	<input type="button" value="Clear"/>
+	
+  <div>{{> loginButtons}}</div>
+  {{>canvas}}
 </body>
+
+<template name="canvas">
+  {{userName}}
+  <input id="clear" type="button" value="Clear"/>
+  <canvas></canvas>
+</template>

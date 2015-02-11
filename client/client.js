@@ -1,9 +1,12 @@
+
+
 Meteor.startup(function() {
-	
-	var canvas = $('canvas'),
-		ctx = canvas[0].getContext('2d'),
-		drawing = false,
-		from;
+
+	canvas = $('canvas');
+		drawing = false;
+		from = '';
+
+	ctx = canvas[0].getContext('2d');
 	
 	canvas.attr({
 		
@@ -19,31 +22,9 @@ Meteor.startup(function() {
 		
 		drawing = false;
 		
-	}).on('drag', function(event) {
-		
-		if(!drawing) return;
-		
-		var to = {x: parseInt(event.gesture.center.pageX), y: parseInt(event.gesture.center.pageY)};
-		
-		drawLine(ctx, from, to);
-		
-		Lines.insert({from: from, to: to});
-		
-		from = to;
-	});
+	})
 	
-	$('input').click(function() {
-		Meteor.call('wipeClean');
-	});
-	
-	function drawLine(ctx, from, to) {
-		ctx.beginPath();
-		ctx.moveTo(from.x, from.y);
-		ctx.lineTo(to.x, to.y);
-		ctx.closePath();
-		ctx.stroke();
-	}
-	
+
 	function wipe(ctx) {
 		ctx.fillRect(0, 0, canvas.width(), canvas.height());
 	}
